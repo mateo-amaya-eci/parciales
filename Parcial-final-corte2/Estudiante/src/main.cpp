@@ -6,29 +6,32 @@
 int main() {
     std::vector<Estudiante> estudiantes;
 
-    estudiantes.push_back(Estudiante("Mateo Amaya", 101, 0.0f, 0));
-    estudiantes.push_back(Estudiante("Paula Gomez", 102, 0.0f, 0));
-    estudiantes.push_back(Estudiante("Carlos Garcia", 101, 0.0f, 0));
+    char opcionInicial;
+    std::cout << "\n========= BIENVENIDO AL PROGRAMA DE NOTA DE LOS ESTUDIANTES =========\n";
+    std::cout << "¿Desea usar los estudiantes predefinidos o agregar nuevos estudiantes? (p/a): ";
+    std::cin >> opcionInicial;
 
-    estudiantes[0].registrarNota(5.0f,4);
-    estudiantes[0].registrarNota(4.8f,4);
+    if (opcionInicial == 'p' || opcionInicial == 'P') {
+        // Estudiantes predefinidos
+        estudiantes.push_back(Estudiante("Mateo Amaya", 101, 0.0f, 0));
+        estudiantes.push_back(Estudiante("Paula Gomez", 102, 0.0f, 0));
+        estudiantes.push_back(Estudiante("Carlos Garcia", 103, 0.0f, 0));
 
-    estudiantes[1].registrarNota(2.0f,1);
-    estudiantes[1].registrarNota(3.0f,3);
+        estudiantes[0].registrarNota(5.0f, 4);
+        estudiantes[0].registrarNota(4.8f, 4);
 
-    estudiantes[2].registrarNota(4.5f,3);
-    estudiantes[2].registrarNota(4.0f,4);
+        estudiantes[1].registrarNota(2.0f, 1);
+        estudiantes[1].registrarNota(3.0f, 3);
 
-    char opcion;
-    do {
-    std::cout << "\n¿Desea agregar un nuevo estudiante? (s/n): ";
-        std::cin >> opcion;
+        estudiantes[2].registrarNota(4.5f, 3);
+        estudiantes[2].registrarNota(4.0f, 4);
 
-        if (opcion == 's' || opcion == 'S') {
+        std::cout << "Estudiantes predefinidos cargados exitosamente.\n";
+    } else if (opcionInicial == 'a' || opcionInicial == 'A') {
+        char opcionAgregar;
+        do {
             std::string nombre;
             int id;
-            float nota;
-            int creditos;
 
             std::cout << "Ingrese el nombre del estudiante: ";
             std::cin.ignore(); // Ignorar el salto de línea previo
@@ -37,55 +40,73 @@ int main() {
             std::cout << "Ingrese el ID del estudiante: ";
             std::cin >> id;
 
-            std::cout << "Ingrese la primera nota del estudiante: ";
-            std::cin >> nota;
-
-            std::cout << "Ingrese los créditos de la primera nota: ";
-            std::cin >> creditos;
-
-            // Crear el estudiante y registrar la primera nota
+            // Crear el estudiante
             Estudiante nuevoEstudiante(nombre, id, 0.0f, 0);
-            nuevoEstudiante.registrarNota(nota, creditos);
+
+            // Registrar múltiples notas
+            char opcionNota;
+            do {
+                float nota;
+                int creditos;
+
+                std::cout << "Ingrese una nota: ";
+                std::cin >> nota;
+
+                std::cout << "Ingrese los créditos de la nota: ";
+                std::cin >> creditos;
+
+                nuevoEstudiante.registrarNota(nota, creditos);
+
+                std::cout << "¿Desea agregar otra nota para este estudiante? (s/n): ";
+                std::cin >> opcionNota;
+            } while (opcionNota == 's' || opcionNota == 'S');
 
             // Agregar al vector de estudiantes
             estudiantes.push_back(nuevoEstudiante);
 
             std::cout << "Estudiante agregado exitosamente.\n";
-        }
-    } while (opcion == 's' || opcion == 'S');
+            std::cout << "¿Desea agregar otro estudiante? (s/n): ";
+            std::cin >> opcionAgregar;
+        } while (opcionAgregar == 's' || opcionAgregar == 'S');
+    } else {
+        std::cout << "Opción no válida. Saliendo del programa.\n";
+        return 0;
+    }
 
+    // Mostrar resumen de estudiantes
     std::cout << " ===== Resumen de Estudiantes ===== " << std::endl;
-
     for (size_t i = 0; i < estudiantes.size(); ++i) {
-        std::cout << "\n Estudiante" <<std::endl;
+        std::cout << "\nEstudiante" << std::endl;
         std::cout << estudiantes[i].obtenerResumen() << std::endl;
-        std::cout << "cumple requisitos de grado: (120 creditos)"
-                    << (estudiantes[i].cumpleRequisitosGrado(120) ? "Si" : "No") << std::endl;  
+        std::cout << "Cumple requisitos de grado (3 créditos): "
+                  << (estudiantes[i].cumpleRequisitosGrado(3) ? "Sí" : "No") << std::endl;
+    }
 
-}
-
-float sumPromedios = 0.0f;
-for (const auto& estudiante : estudiantes) {
-    sumPromedios += estudiante.getPromedio();
-}
-float promedioGeneral = sumPromedios / estudiantes.size();
-std::cout << "\n ========= ESTADISTICAS GENERALES ======== " << std::endl;
-std::cout << "Promedio General de Estudiantes: " << promedioGeneral << std::endl;
-
-std::ofstream reporte("reporte_estudiantes.txt");
-if (reporte.is_open()) {
-    reporte << " REPORTE DE ESTUDIANTES \n";
-    reporte << "=========================\n";
+    // Calcular estadísticas generales
+    float sumPromedios = 0.0f;
     for (const auto& estudiante : estudiantes) {
+        sumPromedios += estudiante.getPromedio();
+    }
+    float promedioGeneral = sumPromedios / estudiantes.size();
+    std::cout << "\n========= ESTADÍSTICAS GENERALES =========" << std::endl;
+    std::cout << "Promedio General de Estudiantes: " << promedioGeneral << std::endl;
+
+    // Generar reporte en archivo
+    std::ofstream reporte("reporte_estudiantes.txt");
+    if (reporte.is_open()) {
+        reporte << " REPORTE DE ESTUDIANTES \n";
+        reporte << "=========================\n";
+        for (const auto& estudiante : estudiantes) {
             reporte << "Nombre: " << estudiante.getNombre() << "\n";
             reporte << "Promedio: " << estudiante.getPromedio() << "\n";
-            reporte << "Creditos: " << estudiante.getCreditosAprobados() << "\n";
+            reporte << "Créditos: " << estudiante.getCreditosAprobados() << "\n";
             reporte << "------------------------\n";
         }
-        
+
         reporte << "\nPromedio general: " << promedioGeneral << "\n";
         reporte.close();
         std::cout << "Reporte generado: reporte_estudiantes.txt" << std::endl;
     }
-return 0;
+
+    return 0;
 }
