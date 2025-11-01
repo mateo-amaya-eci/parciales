@@ -78,8 +78,8 @@ int main() {
     for (size_t i = 0; i < estudiantes.size(); ++i) {
         std::cout << "\nEstudiante" << std::endl;
         std::cout << estudiantes[i].obtenerResumen() << std::endl;
-        std::cout << "Cumple requisitos de grado (3 créditos): "
-                  << (estudiantes[i].cumpleRequisitosGrado(3) ? "Sí" : "No") << std::endl;
+        std::cout << "Cumple requisitos de grado (7 créditos): "
+                  << (estudiantes[i].cumpleRequisitosGrado(7) ? "Sí" : "No") << std::endl;
     }
 
     // Calcular estadísticas generales
@@ -105,7 +105,7 @@ int main() {
 
         reporte << "\nPromedio general: " << promedioGeneral << "\n";
         reporte.close();
-        std::cout << "Reporte generado: reporte_estudiantes.txt" << std::endl;
+        
     }
 
     return 0;

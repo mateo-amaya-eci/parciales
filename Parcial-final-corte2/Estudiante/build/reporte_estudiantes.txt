@@ -1,20 +1,12 @@
  REPORTE DE ESTUDIANTES 
 =========================
-Nombre: Mateo Amaya
-Promedio: 4.9
-Creditos: 8
+Nombre: loco
+Promedio: 3.375
+Créditos: 8
 ------------------------
-Nombre: Paula Gomez
-Promedio: 2.75
-Creditos: 4
-------------------------
-Nombre: Carlos Garcia
-Promedio: 4.21429
-Creditos: 7
-------------------------
-Nombre: esteban
-Promedio: 2
-Creditos: 1
+Nombre: paula
+Promedio: 4.69231
+Créditos: 13
 ------------------------
 
-Promedio general: 3.46607
+Promedio general: 4.03365
