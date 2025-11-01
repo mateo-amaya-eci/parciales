@@ -1,4 +1,6 @@
-# EJERCICIO PUNTO 4 PARCIAL FINAL CORTE 2
+# EJERCICIO PUNTO 4 PARCIAL FINAL CORTE 2 DE
+#### MATEO AMAYA : 1000107917 , INGENIERIA ELECTRONICA
+#### PAULA MORALES : 1000108197 , INGENIERIA ELECTRONICA
 
 Escriba el enlace del repositorio de la solución para el cuarto punto del parcial en este entregable o suba un archivo donde se encuentre dicho enlace.
 Tenga en cuenta que los enunciados de los ejercicios 3 y 4 son los siguientes:
