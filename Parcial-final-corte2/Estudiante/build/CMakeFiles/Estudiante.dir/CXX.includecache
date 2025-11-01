@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/Estudiante.h
+string
+-
+
+/home/mateo_amaya/alse/parciales/Parcial-final-corte2/Estudiante/src/Estudiante.cpp
+Estudiante.h
+/home/mateo_amaya/alse/parciales/Parcial-final-corte2/Estudiante/src/Estudiante.h
+sstream
+-
+iostream
+-
+
+/home/mateo_amaya/alse/parciales/Parcial-final-corte2/Estudiante/src/main.cpp
+iostream
+-
+vector
+-
+fstream
+-
+Estudiante.h
+/home/mateo_amaya/alse/parciales/Parcial-final-corte2/Estudiante/src/Estudiante.h
+
